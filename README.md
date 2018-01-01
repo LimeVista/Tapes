@@ -33,7 +33,7 @@ Tapes.track().clear("content");
 ## Get all keys
 ```java
 //NonNull
-List<String> allKey = Tapes.track.getAllKey();
+List<String> allKey = Tapes.track().getAllKey();
 ```
 
 ## Default Track
@@ -50,6 +50,9 @@ Track track = Tapes.track(TAPES.INNER_DB_NAME);
 ```java
 Track track = Tapes.track("custom_track");
 ```
+
+## More API
+* See <a href="https://github.com/LimeVista/Tapes/blob/master/tapesdb/src/main/java/me/limeice/tapesdb/Tapes.java">Tapes</a> or <a href="https://github.com/LimeVista/Tapes/blob/master/tapesdb/src/main/java/me/limeice/tapesdb/Track.java">Track</a>
 
 ## Proguard
 ```groovy
