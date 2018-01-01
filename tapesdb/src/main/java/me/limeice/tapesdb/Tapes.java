@@ -23,10 +23,10 @@ public final class Tapes {
     @SuppressWarnings("SpellCheckingInspection")
     public static final String INNER_DB_NAME = "io.tapesdb";
 
-    private static Context mAppContext;
+    private static Context mAppContext = null;
 
     private static final ConcurrentHashMap<String, Track> mTracks = new ConcurrentHashMap<>();
-    private static final ArrayMap<Class, Serializer> mCustomSerializers = new ArrayMap<>();
+    static final ArrayMap<Class, Serializer> mCustomSerializers = new ArrayMap<>();
 
     /**
      * 初始化
@@ -63,7 +63,7 @@ public final class Tapes {
         synchronized (mTracks) {
             Track track = mTracks.get(key);
             if (track == null) {
-                track = new Track(mAppContext, trackName, mCustomSerializers);
+                track = new TrackImpl(mAppContext, trackName, mCustomSerializers);
                 mTracks.put(key, track);
             }
             return track;

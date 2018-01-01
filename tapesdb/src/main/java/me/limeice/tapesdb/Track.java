@@ -1,11 +1,7 @@
 package me.limeice.tapesdb;
 
-import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.util.ArrayMap;
-
-import com.esotericsoftware.kryo.Serializer;
 
 import java.util.List;
 
@@ -15,14 +11,7 @@ import java.util.List;
  */
 
 @SuppressWarnings({"unused", "SameParameterValue", "WeakerAccess"})
-public final class Track {
-
-    private DbStorage mStorage;
-    private final SafeLocker mLocker = new SafeLocker();
-
-    Track(Context context, String trackName, ArrayMap<Class, Serializer> serializers) {
-        mStorage = new DbStorage(context, trackName, serializers);
-    }
+public interface Track {
 
     /**
      * 读取指定键的值
@@ -32,14 +21,7 @@ public final class Track {
      * @return 值
      */
     @Nullable
-    public <E> E read(@NonNull String key) {
-        try {
-            mLocker.lock(key);
-            return mStorage.get(key);
-        } finally {
-            mLocker.release(key);
-        }
-    }
+    <E> E read(@NonNull String key);
 
     /**
      * 读取指定键值，并赋值默认值
@@ -50,23 +32,14 @@ public final class Track {
      * @return 值
      */
     @NonNull
-    public <E> E read(@NonNull String key, @NonNull E defaultVal) {
-        try {
-            mLocker.lock(key);
-            return mStorage.get(key, defaultVal);
-        } finally {
-            mLocker.release(key);
-        }
-    }
+    <E> E read(@NonNull String key, @NonNull E defaultVal);
 
     /**
      * 销毁当前音轨（数据库页）
      *
      * @return {@code true} 销毁成功 {@code false} 销毁失败
      */
-    public boolean destroy() {
-        return mStorage.destroy();
-    }
+    boolean destroy();
 
     /**
      * 写入指定键的值
@@ -75,14 +48,7 @@ public final class Track {
      * @param value 值
      * @param <E>   值类型
      */
-    public <E> void write(@NonNull String key, @NonNull E value) {
-        try {
-            mLocker.lock(key);
-            mStorage.set(key, value);
-        } finally {
-            mLocker.release(key);
-        }
-    }
+    <E> void write(@NonNull String key, @NonNull E value);
 
     /**
      * 检查指定键是否存在值
@@ -90,28 +56,14 @@ public final class Track {
      * @param key 键
      * @return {@code true} 存在 {@code false} 不存在
      */
-    public boolean exist(@NonNull String key) {
-        try {
-            mLocker.lock(key);
-            return mStorage.exist(key);
-        } finally {
-            mLocker.release(key);
-        }
-    }
+    boolean exist(@NonNull String key);
 
     /**
      * 清除指定键的值
      *
      * @param key 键
      */
-    public void clear(@NonNull String key) {
-        try {
-            mLocker.lock(key);
-            mStorage.remove(key);
-        } finally {
-            mLocker.release(key);
-        }
-    }
+    void clear(@NonNull String key);
 
     /**
      * 获得当前音轨（数据库页）所有键
@@ -119,7 +71,5 @@ public final class Track {
      * @return 键集合
      */
     @NonNull
-    public List<String> getAllKey() {
-        return mStorage.getAllKey();
-    }
+    List<String> getAllKey();
 }
