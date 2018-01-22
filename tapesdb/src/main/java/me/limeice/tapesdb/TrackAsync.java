@@ -10,7 +10,7 @@ import java.util.List;
  * Created by Lime on 2018/1/1.
  */
 
-@SuppressWarnings({"unused", "SameParameterValue", "WeakerAccess"})
+@SuppressWarnings({"unused"})
 public interface TrackAsync {
 
     /**

@@ -14,7 +14,6 @@ import java.util.concurrent.ConcurrentHashMap;
  * Tapes,like Non-SQL DataBase
  * Created by Lime on 2018/1/1.
  */
-
 @SuppressWarnings({"unused", "WeakerAccess"})
 public final class Tapes {
 

@@ -13,8 +13,6 @@ import java.util.List;
  * Track 磁带音轨，实现类
  * Created by Lime on 2018/1/1.
  */
-
-@SuppressWarnings({"unused", "SameParameterValue", "WeakerAccess"})
 public final class TrackImpl implements Track {
 
     private DbStorageCore mStorage;

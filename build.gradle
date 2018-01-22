@@ -1,11 +1,8 @@
 buildscript {
-
-    ext.support_version  = '26.1.0'
-
     repositories {
         google()
         jcenter()
-        maven{ url 'http://maven.aliyun.com/nexus/content/groups/public/'}
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.0.1'
@@ -16,11 +13,22 @@ allprojects {
     repositories {
         google()
         jcenter()
-        maven{ url 'http://maven.aliyun.com/nexus/content/groups/public/'}
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
     }
 }
 
-
 task clean(type: Delete) {
     delete rootProject.buildDir
+}
+
+ext {
+    var = [
+            minSdkVersion    : 15,
+            targetSdkVersion : 26,
+            compileSdkVersion: 26,
+            verCode          : 2,
+            buildToolsVersion: "26.1.0",
+            versionName      : "1.1.0122",
+            supportVersion   : "26.+"
+    ]
 }
